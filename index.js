@@ -1,8 +1,8 @@
-const apiKey = '5649efc5202a39f3a1d7cdf4023e4b05';
+const apiKey = 'API_KEY';
 const locButton = document.querySelector('.loc-button');
 const todayInfo = document.querySelector('.today-info');
 const todayWeatherIcon = document.querySelector('.today-weather i');
-const todayTemp = document.querySelector('weather-temp');
+const todayTemp = document.querySelector('.weather-temp');
 const daysList = document.querySelector('.days-list');
 
 // Mapping of weather condicion codes to icon class names 
@@ -37,7 +37,7 @@ function fetchWeatherData(location){
     fetch(apiUrl).then(response => response.json()).then(data => {
         // Update todays info
         const todayWeather = data.list[0].weather[0].description;
-        const todayTemperature = `${Math.round(data[0].main.temp)}°C`;
+        const todayTemperature = `${Math.round(data.list[0].main.temp)}°C`;
         const todayWeatherIconCode = data.list[0].weather[0].icon;
 
         todayInfo.querySelector('h2').textContent = new Date().toLocaleDateString('en', { weekday: 'long' });
@@ -52,13 +52,14 @@ function fetchWeatherData(location){
         const weatherDescriptionElement = document.querySelector('.today-weather > h3');
         weatherDescriptionElement.textContent = todayWeather;
 
-        //Update todays info in the "day-info" section
+        // Update todays info in the "day-info" section
         const todayPrecipitation = `${data.list[0].pop}%`;
         const todayHumidity = `${data.list[0].main.humidity}%`;
         const todayWindSpeed = `${data.list[0].wind.speed} km/h`;
 
         const dayInfoContainer = document.querySelector('.day-info');
         dayInfoContainer.innerHTML = `
+
             <div>
                 <span class="title">PRECIPITATION</span>
                 <span class="value">${todayPrecipitation}</span>
@@ -68,9 +69,10 @@ function fetchWeatherData(location){
                 <span class="value">${todayHumidity}</span>
             </div>
             <div>
-                <span class="title">WIND</span>
+                <span class="title">WIND SPEED</span>
                 <span class="value">${todayWindSpeed}</span>
             </div>
+
         `;
 
         // Update next 4 days weather
@@ -82,15 +84,15 @@ function fetchWeatherData(location){
         daysList.innerHTML = '';
         for(const dayData of nextDaysData){
             const forecastDate = new Date(dayData.dt_txt);
-            const dayAbbreviation = forecastDate.toLocaleDateString('en', { weekday: 'short'});
+            const dayAbbreviation = forecastDate.toLocaleDateString('en', { weekday: 'short' });
             const dayTemp = `${Math.round(dayData.main.temp)}°C`;
             const iconCode = dayData.weather[0].icon;
 
-            // Ensure the day isn't a dublicate of today
+            // Ensure the day isn't a duplicate of today
             if(!uniqueDays.has(dayAbbreviation) && forecastDate.getDate() !== today.getDate()){
                 uniqueDays.add(dayAbbreviation);
                 daysList.innerHTML += `
-
+                
                     <li>
                         <i class='bx bx-${weatherIconMap[iconCode]}'></i>
                         <span>${dayAbbreviation}</span>
@@ -119,5 +121,5 @@ locButton.addEventListener('click', () => {
     const location = prompt('Enter a location :');
     if(!location) return;
 
-    fetchWeatherData(location); 
+    fetchWeatherData(location);
 });

@@ -1,2 +1,2 @@
 # Ignoring Text file containing my OpenWeather API key
-Assets/api_key.txt
+.env

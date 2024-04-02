@@ -29,7 +29,7 @@ const weatherIconMap = {
 }
 
 function fetchWeatherData(location) {
-    const apiKey = process.env.API_KEY
+    const apiKey = '13d913b2ee964127b2a5f3b02d24a452'
 	// Construct the API url with the location and API key
 	const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${location}&appid=${apiKey}&units=metric`
 

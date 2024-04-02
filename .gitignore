@@ -1,2 +1,2 @@
-# Ignoring Text file containing my OpenWeather API key
 .env
+/node_modules

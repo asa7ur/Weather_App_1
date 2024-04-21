@@ -10,7 +10,7 @@ exports.handler = async (event, context) => {
 	if (method !== 'POST') {
 		return {
 			statusCode: 405,
-			body: 'Only PUT Requests Allowed',
+			body: 'Only POST Requests Allowed',
 		}
 	}
 	const { location } = JSON.parse(event.body)

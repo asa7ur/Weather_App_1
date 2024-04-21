@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link rel="stylesheet" href="style.css">
     <title>Weather App UI</title>
 </head>
+
 <body>
 
     <div class="container">
@@ -21,7 +23,7 @@
                 </div>
             </div>
             <div class="today-weather">
-                <i class='bx bx-sun' ></i>
+                <i class='bx bx-sun'></i>
                 <h1 class="weather-temp">
                     22°C
                 </h1>
@@ -47,34 +49,37 @@
 
             <ul class="days-list">
                 <li>
-                    <i class='bx bx-cloud' ></i>
+                    <i class='bx bx-cloud'></i>
                     <span>Tue</span>
                     <span class="day-temp">21°C</span>
                 </li>
                 <li>
-                    <i class='bx bx-sun' ></i>
+                    <i class='bx bx-sun'></i>
                     <span>Wed</span>
                     <span class="day-temp">24°C</span>
                 </li>
                 <li>
-                    <i class='bx bx-sun' ></i>
+                    <i class='bx bx-sun'></i>
                     <span>Thu</span>
                     <span class="day-temp">24°C</span>
                 </li>
                 <li>
-                    <i class='bx bx-cloud-drizzle' ></i>
+                    <i class='bx bx-cloud-drizzle'></i>
                     <span>Fri</span>
                     <span class="day-temp">20°C</span>
                 </li>
             </ul>
 
-            <div class="btn-container">
-                <button class="loc-button">Search Location</button>
-            </div>
+            <form class="form">
+                <input type="text" name="search" class="form-input" placeholder="Search Location">
+                <button type="submit" class="submit-btn"><i class='bx bx-search'></i></button>
+            </form>
+            <p class="alert"></p>
 
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
     <script src="./app.js"></script>
 </body>
+
 </html>

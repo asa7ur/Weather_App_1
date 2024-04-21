@@ -1,4 +1,6 @@
-const locButton = document.querySelector('.loc-button')
+const form = document.querySelector('.form')
+const input = document.querySelector('.form-input')
+const alert = document.querySelector('.alert')
 const todayInfo = document.querySelector('.today-info')
 const todayWeatherIcon = document.querySelector('.today-weather i')
 const todayTemp = document.querySelector('.weather-temp')
@@ -26,6 +28,7 @@ const weatherIconMap = {
 }
 
 async function getWeatherData(location) {
+	alert.style.display = 'none'
 	try {
 		const { data } = await axios.post('/api/weather', { location })
 		const todayWeather = data.list[0].weather[0].description
@@ -57,7 +60,7 @@ async function getWeatherData(location) {
 		weatherDescriptionElement.textContent = todayWeather
 
 		// Update todays info in the "day-info" section
-		const todayPrecipitation = `${data.list[0].pop*100}%`
+		const todayPrecipitation = `${data.list[0].pop * 100}%`
 		const todayHumidity = `${data.list[0].main.humidity}%`
 		const todayWindSpeed = `${data.list[0].wind.speed} km/h`
 
@@ -115,7 +118,13 @@ async function getWeatherData(location) {
 			// Stop after getting four days
 			if (count === 4) break
 		}
-	} catch (error) {}
+	} catch (error) {
+		alert.style.display = 'block'
+		alert.textContent = `Can't find weather data for ${location}`
+		setTimeout(() => {
+			alert.style.opacity = 0
+		}, 5000)
+	}
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -123,9 +132,11 @@ document.addEventListener('DOMContentLoaded', () => {
 	getWeatherData(defaultLocation)
 })
 
-locButton.addEventListener('click', () => {
-	const location = prompt('Enter a location :')
-	if (!location) return
-
-	getWeatherData(location)
+form.addEventListener('submit', (e) => {
+	e.preventDefault()
+	const location = input.value
+	if (location) {
+		getWeatherData(location)
+	}
+	input.value = ''
 })
